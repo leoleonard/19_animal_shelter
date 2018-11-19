@@ -16,10 +16,17 @@ public class PetsController {
     }
 
     @GetMapping("/petslist")
-    public String persList(Model model) {
+    public String petsList(Model model) {
         model.addAttribute("pets", petsRepository.getPets());
         return "pets";
     }
+
+    @GetMapping("/add")
+    public String addPet(Model model){
+        model.addAttribute("pets", new Pets());
+        return "petsForm";
+    }
+
 
 
 
