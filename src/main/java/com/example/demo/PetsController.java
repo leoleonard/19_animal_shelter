@@ -27,6 +27,14 @@ public class PetsController {
         return "petsForm";
     }
 
+    @GetMapping("/savePet")
+    public String savePet(Pets pets) {
+        petsRepository.addPets(pets);
+        return "/pets";
+    }
+
+
+
 
 
 
