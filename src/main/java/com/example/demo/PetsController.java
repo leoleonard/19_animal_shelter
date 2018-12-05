@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PetsController {
@@ -15,10 +16,16 @@ public class PetsController {
         this.petsRepository = petsRepository;
     }
 
-    @GetMapping("/petslist")
+    @GetMapping("/")
     public String petsList(Model model) {
-        model.addAttribute("pets", petsRepository.getPets());
-        return "pets";
+        model.addAttribute("petsList", petsRepository.getPets("all", "all"));
+        return "index";
+    }
+
+    @GetMapping("/sort")
+    public String sortedPets(Model model, @RequestParam String type, @RequestParam String name) {
+        model.addAttribute("petsList", petsRepository.getPets(type, name));
+        model.addAttribute()
     }
 
     @GetMapping("/add")
