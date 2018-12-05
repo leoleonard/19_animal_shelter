@@ -6,6 +6,7 @@ public class Pets {
         private String description;
         private int id;
 
+
     public Pets(String name, String type, String description, int id) {
         this.name = name;
         this.type = type;
@@ -45,7 +46,7 @@ public class Pets {
         this.id = id;
     }
 
-    public Pets() {
+    public Pets(Pets pet) {
         }
 
     @Override
@@ -57,4 +58,5 @@ public class Pets {
                 ", id=" + id +
                 '}';
     }
+
 }

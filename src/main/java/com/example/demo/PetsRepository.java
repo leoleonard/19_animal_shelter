@@ -11,9 +11,6 @@ public class PetsRepository {
 
     private List<Pets> pets = new ArrayList<>();
 
-    public PetsRepository(List<Pets> pets) {
-        this.pets = pets;
-    }
 
     public PetsRepository() {
         pets.add(new Pets("Cheester", "dog", "lovely, always bring the stick back", 1));
@@ -21,26 +18,68 @@ public class PetsRepository {
         pets.add(new Pets("Rogger", "rabbit", "white ball of furr", 3));
     }
 
-    public List<Pets> getPets() {
-        return pets;
+    public List<Pets> getPets(String type, String name) {
+        List<Pets> newList = new ArrayList<>();
+        if (type.equals("all") && name.equals("all")) {
+            return pets;
+        } else if (type.equals("all") && !(name.equals("all"))) {
+            for (int i = 0; i < pets.size(); i++) {
+                if (pets.get(i).getName().equals(name)) {
+                    newList.add(pets.get(i));
+                }
+            }
+            return newList;
+        } else if (!(type.equals("all")) && name.equals("all")) {
+            for (int i = 0; i < pets.size(); i++) {
+                if (pets.get(i).getType().equals(type)) {
+                    newList.add(pets.get(i));
+                }
+            }
+            return newList;
+        } else {
+            for (int i = 0; i < pets.size(); i++) {
+                if (pets.get(i).getName().equals(name) && pets.get(i).getType().equals(type)) {
+                    newList.add(pets.get(i));
+                }
+            }
+            return newList;
+        }
     }
 
-    public void addPets(String name, String type, String description, int id) {
-        pets.add(new Pets(name, type, description, id));
-    }
 
-    public void addPets(Pets pet){
+    public void addPets(Pets pet) {
         pets.add(pet);
     }
 
-    public ArrayList<Pets> getPetsByType(String type) {
-        ArrayList<Pets> typesList = new ArrayList<>();
-        for (Pets pet : getPets()) {
-            if (pet.getType().compareTo(type) == 0)
-                typesList.add(pet);
+    public Pets showPets(String name) {
+        for (Pets pet : pets) {
+            if (pet.getName().equals(name)) {
+                return pet;
+            }
         }
-        return typesList;
+        return null;
     }
+
+    public List<Pets> sortByType(String type) {
+        ArrayList<Pets> sortedList = new ArrayList<>();
+        for(int i = 0; i< pets.size();i++){
+            if(pets.get(i).getType().equals(type)){
+                sortedList.add(pets.get(i));
+            }
+        }
+        return sortedList;
+    }
+
+    public List<Pets> sortByName(String name) {
+        ArrayList<Pets> sortedList = new ArrayList<>();
+        for(int i = 0; i< pets.size();i++){
+            if(pets.get(i).getName().equals(name)){
+                sortedList.add(pets.get(i));
+            }
+        }
+        return sortedList;
+    }
+
 
 }
 
